@@ -3,10 +3,9 @@
     <a-upload-dragger
       v-model:fileList="fileList"
       name="file"
-      maxCount="1"
+      :maxCount="1"
       :multiple="true"
       :showUploadList="false"
-      action="https://www.mocky.io/v2/5cc8019d300000980a055e76"
       @change="handleChange"
       @drop="handleDrop"
     >
@@ -24,10 +23,12 @@ import { message } from "ant-design-vue";
 import { defineComponent, ref } from "vue";
 
 import { readTextFile } from "@tauri-apps/api/fs";
-const contents = readTextFile(
+let contents = await readTextFile(
   "D:/doit/2022/esp32c2_sensor_dev_board/esp32c2_sensor_dev_board_example/build/config/sdkconfig.json"
 );
-console.info(contents);
+let chip = JSON.parse(contents).IDF_TARGET;
+
+console.info(chip);
 
 export default defineComponent({
   components: {
@@ -35,6 +36,7 @@ export default defineComponent({
   },
   setup() {
     const handleChange = (info) => {
+      console.info(info.file);
       const status = info.file.status;
       if (status !== "uploading") {
         console.log(info.file, info.fileList);

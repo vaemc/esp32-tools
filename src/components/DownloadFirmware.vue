@@ -3,10 +3,10 @@
       <a-upload-dragger
         v-model:fileList="fileList"
         name="file"
-        maxCount="1"
+        :maxCount="1"
         :multiple="true"
         :showUploadList="false"
-        action="https://www.mocky.io/v2/5cc8019d300000980a055e76"
+        :directory="true"
         @change="handleChange"
         @drop="handleDrop"
       >
