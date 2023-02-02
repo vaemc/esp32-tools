@@ -61,7 +61,7 @@
     },
     "windows": [
       {
-        "fileDropEnabled": false,
+        "fileDropEnabled": true,
         "theme": "Dark",
         "fullscreen": false,
         "height": 600,
