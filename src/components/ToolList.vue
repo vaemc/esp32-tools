@@ -1,6 +1,10 @@
 <template>
   <a-card title="所有功能">
-   
+    <div>
+      <a-button style="margin: 5px" v-for="n in 10" type="primary"
+        >擦除固件</a-button
+      >
+    </div>
   </a-card>
 </template>
 <script>

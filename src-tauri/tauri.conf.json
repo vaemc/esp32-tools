@@ -13,6 +13,8 @@
   "tauri": {
     "allowlist": {
       "all": false,
+      "fs": { "all": true, "scope": ["**"] },
+      "path": { "all": true },
       "shell": {
         "all": false,
         "open": true
@@ -59,13 +61,15 @@
     },
     "windows": [
       {
-        "fileDropEnabled":false,
-        "theme":"Dark",
+        "fileDropEnabled": false,
+        "theme": "Dark",
         "fullscreen": false,
         "height": 600,
-        "resizable": true,
-        "title": "esp32-tools",
-        "width": 800
+        "minHeight": 600,
+        "resizable": false,
+        "title": "ESP32 TOOLS",
+        "width": 600,
+        "minWidth": 600
       }
     ]
   }

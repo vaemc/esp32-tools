@@ -14,9 +14,7 @@
         <inbox-outlined></inbox-outlined>
       </p>
       <p class="ant-upload-text">选择或者拖拽build目录到此</p>
-      <p class="ant-upload-hint">
-       请在执行idf.py build后再使用
-      </p>
+      <p class="ant-upload-hint">请在执行idf.py build后再使用</p>
     </a-upload-dragger>
   </a-card>
 </template>
@@ -24,6 +22,13 @@
 import { InboxOutlined } from "@ant-design/icons-vue";
 import { message } from "ant-design-vue";
 import { defineComponent, ref } from "vue";
+
+import { readTextFile } from "@tauri-apps/api/fs";
+const contents = readTextFile(
+  "D:/doit/2022/esp32c2_sensor_dev_board/esp32c2_sensor_dev_board_example/build/config/sdkconfig.json"
+);
+console.info(contents);
+
 export default defineComponent({
   components: {
     InboxOutlined,

@@ -8,8 +8,7 @@
         <MergeBin />
       </a-col>
     </a-row>
-
-    <ToolList />
+    <ToolList style="margin-top:16px;" />
   </div>
 </template>
 <script setup>
