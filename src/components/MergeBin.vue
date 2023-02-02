@@ -15,8 +15,7 @@
       </p>
       <p class="ant-upload-text">选择或者拖拽build目录到此</p>
       <p class="ant-upload-hint">
-        Support for a single or bulk upload. Strictly prohibit from uploading
-        company data or other band files
+       请在执行idf.py build后再使用
       </p>
     </a-upload-dragger>
   </a-card>
