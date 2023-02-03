@@ -16,8 +16,17 @@
       "fs": { "all": true, "scope": ["**"] },
       "path": { "all": true },
       "shell": {
-        "all": false,
-        "open": true
+        "all": true,
+        "execute": true,
+        "sidecar": true,
+        "open": true,
+        "scope": [
+          {
+            "name": "esptool",
+            "cmd": "C:/Users/vaemc/Desktop/esptool.exe",
+            "args": ["--chip ESP32-C2  merge_bin -o D:/2023/rust/flash_image.bin --flash_mode dio --flash_freq 60m --flash_size 2MB 0x0 D:/doit/2022/esp32c2_sensor_dev_board/esp32c2_sensor_dev_board_example/build/bootloader/bootloader.bin 0x10000 D:/doit/2022/esp32c2_sensor_dev_board/esp32c2_sensor_dev_board_example/build/esp32c2_sensor_dev_board_example.bin 0x8000 D:/doit/2022/esp32c2_sensor_dev_board/esp32c2_sensor_dev_board_example/build/partition_table/partition-table.bin"]
+          }
+        ]
       }
     },
     "bundle": {
