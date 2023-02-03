@@ -12,7 +12,10 @@
   "dependencies": {
     "@tauri-apps/api": "^1.2.0",
     "ant-design-vue": "^3.2.15",
-    "vue": "^3.2.45"
+    "is-hex-prefixed": "^1.0.0",
+    "vue": "^3.2.45",
+    "xterm": "^5.1.0",
+    "xterm-addon-fit": "^0.7.0"
   },
   "devDependencies": {
     "@tauri-apps/cli": "^1.2.2",

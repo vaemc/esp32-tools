@@ -24,7 +24,7 @@
           {
             "name": "esptool",
             "cmd": "C:/Users/vaemc/Desktop/esptool.exe",
-            "args": ["--chip ESP32-C2  merge_bin -o D:/2023/rust/flash_image.bin --flash_mode dio --flash_freq 60m --flash_size 2MB 0x0 D:/doit/2022/esp32c2_sensor_dev_board/esp32c2_sensor_dev_board_example/build/bootloader/bootloader.bin 0x10000 D:/doit/2022/esp32c2_sensor_dev_board/esp32c2_sensor_dev_board_example/build/esp32c2_sensor_dev_board_example.bin 0x8000 D:/doit/2022/esp32c2_sensor_dev_board/esp32c2_sensor_dev_board_example/build/partition_table/partition-table.bin"]
+            "args": true
           }
         ]
       }
@@ -70,15 +70,16 @@
     },
     "windows": [
       {
+        "center": true,
         "fileDropEnabled": true,
         "theme": "Dark",
         "fullscreen": false,
-        "height": 600,
-        "minHeight": 600,
-        "resizable": false,
+        "height": 700,
+        "minHeight": 700,
+        "resizable": true,
         "title": "ESP32 TOOLS",
-        "width": 600,
-        "minWidth": 600
+        "width": 800,
+        "minWidth": 800
       }
     ]
   }

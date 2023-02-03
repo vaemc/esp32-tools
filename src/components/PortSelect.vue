@@ -1,12 +1,6 @@
 <template>
-  <a-select
-    ref="select"
-    v-model="serialPortListDefaultSelectPath"
-    @dropdownVisibleChange="serialPortListSelectFocus"
-    @focus="serialPortListSelectFocus"
-    @change="serialPortListSelectChange"
-    style="width: 100%; margin-bottom: 16px"
-  >
+  <a-select ref="select" v-model="serialPortListDefaultSelectPath" @dropdownVisibleChange="serialPortListSelectFocus"
+    @focus="serialPortListSelectFocus" @change="serialPortListSelectChange" style="width: 100%; margin-bottom: 16px">
     <a-select-option v-for="item in serialPortList" :value="item">{{
       item
     }}</a-select-option>
@@ -31,6 +25,8 @@ export default defineComponent({
     const serialPortListSelectChange = (value) => {
       console.info(value);
     };
+
+   
     return {
       serialPortListSelectFocus,
       serialPortListSelectChange,
@@ -39,6 +35,6 @@ export default defineComponent({
     };
   },
 
-  
+
 });
 </script>

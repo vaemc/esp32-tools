@@ -437,6 +437,11 @@ is-core-module@^2.9.0:
   dependencies:
     has "^1.0.3"
 
+is-hex-prefixed@^1.0.0:
+  version "1.0.0"
+  resolved "https://registry.npmmirror.com/is-hex-prefixed/-/is-hex-prefixed-1.0.0.tgz#7d8d37e6ad77e5d127148913c573e082d777f554"
+  integrity sha512-WvtOiug1VFrE9v1Cydwm+FnXd3+w9GaeVUss5W4v/SLy3UW00vP+6iNF2SdnfiBoLy4bTqVdkftNGTUeOFVsbA==
+
 is-plain-object@3.0.1:
   version "3.0.1"
   resolved "https://registry.yarnpkg.com/is-plain-object/-/is-plain-object-3.0.1.tgz#662d92d24c0aa4302407b0d45d21f2251c85f85b"
@@ -594,3 +599,13 @@ warning@^4.0.0:
   integrity sha512-rpJyN222KWIvHJ/F53XSZv0Zl/accqHR8et1kpaMTD/fLCRxtV8iX8czMzY7sVZupTI3zcUTg8eycS2kNF9l6w==
   dependencies:
     loose-envify "^1.0.0"
+
+xterm-addon-fit@^0.7.0:
+  version "0.7.0"
+  resolved "https://registry.npmmirror.com/xterm-addon-fit/-/xterm-addon-fit-0.7.0.tgz#b8ade6d96e63b47443862088f6670b49fb752c6a"
+  integrity sha512-tQgHGoHqRTgeROPnvmtEJywLKoC/V9eNs4bLLz7iyJr1aW/QFzRwfd3MGiJ6odJd9xEfxcW36/xRU47JkD5NKQ==
+
+xterm@^5.1.0:
+  version "5.1.0"
+  resolved "https://registry.npmmirror.com/xterm/-/xterm-5.1.0.tgz#3e160d60e6801c864b55adf19171c49d2ff2b4fc"
+  integrity sha512-LovENH4WDzpwynj+OTkLyZgJPeDom9Gra4DMlGAgz6pZhIDCQ+YuO7yfwanY+gVbn/mmZIStNOnVRU/ikQuAEQ==
