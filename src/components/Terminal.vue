@@ -4,27 +4,28 @@
     </div>
 </template>
 <script setup>
+import emitter from "../utils/bus"
 import "xterm/css/xterm.css";
 import "xterm/lib/xterm.js";
 import { Terminal } from "xterm";
 import { FitAddon } from "xterm-addon-fit";
 import { onMounted } from "vue";
 
+const terminal = new Terminal({
+    fontSize: 14,
+    allowProposedApi: true,
+    cursorStyle: "bar",
+    theme: {
+        background: "#202020",
+        magenta: "#e39ef7",
+    },
+});
+
+emitter.on('terminal', data => {
+    terminal.writeln(data);
+})
 
 onMounted(() => {
-    const terminal = new Terminal({
-        rendererType: "canvas",
-        fontSize: 14,
-        allowProposedApi: true,
-        disableStdin: false,
-        cursorStyle: "underline",
-        cursorBlink: true,
-        theme: {
-            background: "#1e1e1e",
-            cursor: "help",
-            magenta: "#e39ef7",
-        },
-    });
     const fitAddon = new FitAddon();
     terminal.loadAddon(fitAddon);
     terminal.open(document.getElementById("terminal"));
