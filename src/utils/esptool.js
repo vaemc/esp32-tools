@@ -2,22 +2,35 @@ import { Command } from "@tauri-apps/api/shell";
 import isHexPrefixed from "is-hex-prefixed";
 import { exists, readTextFile } from "@tauri-apps/api/fs";
 import { terminalWrite } from "./bus";
-import chalk from "chalk";
+
+import kleur from "kleur";
+
+export const buildDirectory = {
+  flash_args: "\\flash_args",
+  flash_app_args: "\\flash_app_args",
+  sdkconfig: "\\config\\sdkconfig.json",
+};
 
 export async function getFlashArgs(path) {
-  if (!(await exists(path + "/flash_args"))) {
-    terminalWrite(chalk.magenta.bold(`"${path}\\flash_args" file not found`));
-    return;
+  const filePathList = Object.keys(buildDirectory).map(
+    (key) => buildDirectory[key]
+  );
+  let filePathListCheckResult = await Promise.all(
+    filePathList.map(async (item) => {
+      let result = await exists(path + item);
+      if (!result) {
+        terminalWrite(kleur.blue().bold(`"${path}${item}" file not found`));
+      }
+      return result;
+    })
+  );
+  if (filePathListCheckResult.filter((x) => x).length != filePathList.length) {
+    return false;
   }
-  if (!(await exists(path + "/config/sdkconfig.json"))) {
-    terminalWrite(
-      chalk.magenta.bold(`"${path}\\config\\sdkconfig.json" file not found`)
-    );
-    return;
-  }
-  let sdkconfig = await readTextFile(path + "/config/sdkconfig.json");
+
+  let sdkconfig = await readTextFile(path + buildDirectory.sdkconfig);
   let chip = JSON.parse(sdkconfig).IDF_TARGET;
-  let flashArgsText = await readTextFile(path + "/flash_args");
+  let flashArgsText = await readTextFile(path + buildDirectory.flash_args);
   let flashArgs = [];
   flashArgsText.split("\n").map((item) => {
     let line = item.split(" ");
@@ -25,11 +38,15 @@ export async function getFlashArgs(path) {
       flashArgs.push(...line);
     } else {
       flashArgs.push(line[0]);
-      flashArgs.push(path + "/" + line[1]);
+      flashArgs.push(path + "\\" + line[1]);
     }
   });
 
+  let flashAppArgs = await readTextFile(path + buildDirectory.flash_app_args);
+  let appName = flashAppArgs.split("\n")[1].split(" ")[1];
+
   const data = {
+    appName: appName,
     chip: chip,
     flashArgs: flashArgs,
   };

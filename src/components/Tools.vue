@@ -34,7 +34,6 @@ import { message } from 'ant-design-vue';
 import { runCmd, getFlashArgs } from "../utils/esptool"
 import { InboxOutlined } from "@ant-design/icons-vue";
 import { listen } from "@tauri-apps/api/event";
-import emitter from "../utils/bus"
 export default defineComponent({
   components: {
     InboxOutlined,
@@ -51,7 +50,10 @@ export default defineComponent({
         case "mergeBin":
           if (filename === "build") {
             let data = await getFlashArgs(path);
-            let cmd = ["--chip", data.chip, "merge_bin", "-o", "F:/2023/doit/c2/vvvvv.bin", ...data.flashArgs]
+            if (!data) {
+              return;
+            }
+            let cmd = ["--chip", data.chip, "merge_bin", "-o", "F:/2023/doit/c2/" + data.appName, ...data.flashArgs]
             runCmd(cmd);
           }
           break;
@@ -62,13 +64,16 @@ export default defineComponent({
               return;
             }
             let data = await getFlashArgs(path);
+            if (!data) {
+              return;
+            }
             let cmd = ["--chip", data.chip, "-p", port, "-b", "1152000", "--before=default_reset", "--after=hard_reset", "write_flash", ...data.flashArgs]
             runCmd(cmd);
           }
           break;
         case "flashSingle":
           if (filename.split(".").pop() === "bin") {
-            let cmd = [ "-p", port,"write_flash", "0x0", path]
+            let cmd = ["-p", port, "write_flash", "0x0", path]
             runCmd(cmd);
           }
 
