@@ -76,7 +76,7 @@
         "fullscreen": false,
         "height": 710,
         "minHeight": 710,
-        "resizable": true,
+        "resizable": false,
         "title": "ESP32 TOOLS",
         "width": 800,
         "minWidth": 800

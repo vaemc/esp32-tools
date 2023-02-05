@@ -2,7 +2,8 @@ import { Command } from "@tauri-apps/api/shell";
 import isHexPrefixed from "is-hex-prefixed";
 import { exists, readTextFile } from "@tauri-apps/api/fs";
 import { terminalWrite } from "./bus";
-
+import { message } from "ant-design-vue";
+import { portStore } from "../utils/store";
 import kleur from "kleur";
 
 export const buildDirectory = {
@@ -10,6 +11,45 @@ export const buildDirectory = {
   flash_app_args: "\\flash_app_args",
   sdkconfig: "\\config\\sdkconfig.json",
 };
+
+export async function generateCmd(data, path = "") {
+  const port = portStore().port;
+  let cmd = data;
+  if (cmd.find((x) => x === "${port}") != null) {
+    if (port === "") {
+      message.warning("请选择端口！");
+      return;
+    }
+  }
+  let isIncludeFlashArgs =
+    cmd.find((x) => x === "${flashArgs}") == null ? false : true;
+  let appInfo;
+  if (isIncludeFlashArgs) {
+    appInfo = await getFlashArgs(path);
+  }
+  cmd = cmd.map((item) => {
+    if (item === "${chip}") {
+      return appInfo.chip;
+    }
+    switch (item) {
+      case "${chip}":
+        return appInfo.chip;
+      case "${appName}":
+        return "F:/2023/doit/c2/" + appInfo.appName;
+      case "${port}":
+        return port;
+      case "${path}":
+        return path;
+    }
+    return item;
+  });
+  if (isIncludeFlashArgs) {
+    cmd.splice(cmd.indexOf("${flashArgs}"), 0, ...appInfo.flashArgs);
+    cmd = cmd.filter((x) => x != "${flashArgs}");
+  }
+
+  return cmd;
+}
 
 export async function getFlashArgs(path) {
   const filePathList = Object.keys(buildDirectory).map(

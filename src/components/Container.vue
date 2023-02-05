@@ -3,7 +3,7 @@
     <SerialPortList />
     <a-row :gutter="16">
       <a-col :span="18">
-        <Tools />
+        <ToolList />
         <CustomToolList style="margin-top:16px;" />
       </a-col>
       <a-col :span="6">
@@ -15,7 +15,7 @@
 </template>
 <script setup>
 import SerialPortList from "./SerialPortList.vue";
-import Tools from "./Tools.vue";
+import ToolList from "./ToolList.vue";
 import CustomToolList from "./CustomToolList.vue";
 import Terminal from "./Terminal.vue";
 import FirmwareList from "./FirmwareList.vue";

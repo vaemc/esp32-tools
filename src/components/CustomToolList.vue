@@ -1,37 +1,30 @@
 <template>
   <a-card title="所有功能">
     <div style="display:flex; flex-wrap: wrap; justify-content:center">
-      <a-button style="margin: 5px" v-for="n in 10" type="primary"
-        >擦除固件</a-button
-      >
+      <a-tooltip v-for="item in customToolList" :key="item.name">
+        <template #title v-if="item.toast != null">{{ item.toast }}</template>
+        <a-button @click="run(item.cmd)" style="margin: 5px" type="primary">{{
+          item.name
+        }}</a-button>
+      </a-tooltip>
+
+
+
     </div>
   </a-card>
 </template>
 <script>
-import { InboxOutlined } from "@ant-design/icons-vue";
-import { message } from "ant-design-vue";
 import { defineComponent, ref } from "vue";
+import { customToolList } from "../utils/tools-config"
+import { runCmd, generateCmd } from "../utils/esptool"
 export default defineComponent({
-  components: {
-    InboxOutlined,
-  },
   setup() {
-    const handleChange = (info) => {
-      const status = info.file.status;
-      if (status !== "uploading") {
-        console.log(info.file, info.fileList);
-      }
-      if (status === "done") {
-        message.success(`${info.file.name} file uploaded successfully.`);
-      } else if (status === "error") {
-        message.error(`${info.file.name} file upload failed.`);
-      }
-    };
     return {
-      handleChange,
-      fileList: ref([]),
-      handleDrop: (e) => {
-        console.log(e);
+      customToolList,
+      run: async (data) => {
+        let cmd = data;
+        cmd = await generateCmd(cmd);
+        runCmd(cmd);
       },
     };
   },
