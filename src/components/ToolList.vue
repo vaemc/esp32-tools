@@ -29,35 +29,29 @@ import { message } from 'ant-design-vue';
 import { runCmd, generateCmd } from "../utils/esptool"
 import { InboxOutlined } from "@ant-design/icons-vue";
 import { listen } from "@tauri-apps/api/event";
-import { toolListConfig } from "../utils/tools-config"
+import { getToolListConfig } from "../utils/hal"
+const toolListConfig = await getToolListConfig()
 export default defineComponent({
   components: {
     InboxOutlined,
   },
   setup() {
     const dropBoxClass = ref("dropBox")
-
-
-
     const toolsRadioSelect = ref({
       dropDesc: "选择或者拖拽build目录到此",
       dropHelp: "请在执行idf.py build后再使用",
     })
-
     const toolsRadio = ref();
+    //const toolListConfig = ref();
 
     listen("tauri://file-drop", async (event) => {
       let path = event.payload[0];
       let filename = path.replace(/^.*[\\\/]/, "");
-     
       const re = new RegExp(toolsRadioSelect.value.dropRegex);
       if (!re.test(filename)) {
         message.warning('请按要求选择文件！');
         return;
       }
-
-
-
       let cmd = toolsRadioSelect.value.cmd;
       cmd = await generateCmd(cmd, path);
       runCmd(cmd);
@@ -70,7 +64,6 @@ export default defineComponent({
       if (re.test(filename)) {
         dropBoxClass.value = "dropBoxHover"
       }
-
     });
 
     listen("tauri://file-drop-cancelled", (event) => {
@@ -79,13 +72,16 @@ export default defineComponent({
 
     const toolsRadioChange = (data) => {
       toolsRadioSelect.value = toolListConfig.find(x => x.name === data.target.value)
-
     }
-    onMounted(() => {
+    onMounted(async () => {
+
+
       if (toolListConfig.length > 0) {
         toolsRadio.value = toolListConfig[0].name;
         toolsRadioSelect.value = toolListConfig[0];
       }
+
+
     })
     return {
       dropBoxClass,

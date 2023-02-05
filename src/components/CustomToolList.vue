@@ -15,8 +15,9 @@
 </template>
 <script>
 import { defineComponent, ref } from "vue";
-import { customToolList } from "../utils/tools-config"
 import { runCmd, generateCmd } from "../utils/esptool"
+import { getCustomToolList } from "../utils/hal"
+const customToolList = await getCustomToolList()
 export default defineComponent({
   setup() {
     return {

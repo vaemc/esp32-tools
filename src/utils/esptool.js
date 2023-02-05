@@ -4,6 +4,7 @@ import { exists, readTextFile } from "@tauri-apps/api/fs";
 import { terminalWrite } from "./bus";
 import { message } from "ant-design-vue";
 import { portStore } from "../utils/store";
+import { getCurrentDir } from "../utils/hal";
 import kleur from "kleur";
 
 export const buildDirectory = {
@@ -14,6 +15,7 @@ export const buildDirectory = {
 
 export async function generateCmd(data, path = "") {
   const port = portStore().port;
+  const currentDir = await getCurrentDir();
   let cmd = data;
   if (cmd.find((x) => x === "${port}") != null) {
     if (port === "") {
@@ -35,7 +37,7 @@ export async function generateCmd(data, path = "") {
       case "${chip}":
         return appInfo.chip;
       case "${appName}":
-        return "F:/2023/doit/c2/" + appInfo.appName;
+        return currentDir +"\\firmware\\" +appInfo.appName;
       case "${port}":
         return port;
       case "${path}":
