@@ -23,7 +23,7 @@
         "scope": [
           {
             "name": "esptool",
-            "cmd": "C:/Users/vaemc/Desktop/esptool.exe",
+            "cmd": "./esptool/esptool.exe",
             "args": true
           }
         ]

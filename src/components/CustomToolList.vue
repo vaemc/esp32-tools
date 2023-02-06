@@ -17,7 +17,7 @@
 import { defineComponent, ref } from "vue";
 import { runCmd, generateCmd } from "../utils/esptool"
 import { getCustomToolList } from "../utils/hal"
-const customToolList = await getCustomToolList()
+const customToolList = await getCustomToolList();
 export default defineComponent({
   setup() {
     return {

@@ -33,7 +33,7 @@ onMounted(() => {
 })
 </script>
 <style>
-.xterm .xterm-viewport {
+/* .xterm .xterm-viewport {
   background-color: transparent;
   overflow-y: scroll;
   cursor: default;
@@ -53,5 +53,21 @@ onMounted(() => {
 
 .xterm-viewport::-webkit-scrollbar-thumb {
   background: var(--highlight);
+} */
+
+
+.xterm-viewport::-webkit-scrollbar-track {
+  -webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
+  background-color: #141414;
+}
+
+.xterm-viewport::-webkit-scrollbar {
+  width: 10px;
+  background-color: #141414;
+}
+
+.xterm-viewport::-webkit-scrollbar-thumb {
+  background-color: #000000;
+  border: 2px solid #555555;
 }
 </style>

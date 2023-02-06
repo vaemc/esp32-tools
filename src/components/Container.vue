@@ -2,11 +2,11 @@
   <div>
     <SerialPortSelect />
     <a-row :gutter="16">
-      <a-col :span="18">
+      <a-col :span="15">
         <ToolList />
         <CustomToolList style="margin-top:16px;" />
       </a-col>
-      <a-col :span="6">
+      <a-col :span="9">
         <FirmwareList />
       </a-col>
     </a-row>

@@ -1,5 +1,5 @@
 import { invoke } from "@tauri-apps/api/tauri";
-import { readTextFile } from "@tauri-apps/api/fs";
+import { readTextFile, readDir, BaseDirectory } from "@tauri-apps/api/fs";
 
 export async function getSerialPortList() {
   let data = await invoke("get_serial_port_list");
@@ -24,3 +24,13 @@ export async function getCustomToolList() {
   );
   return jsonData.customToolList;
 }
+
+export async function getFirmwareList() {
+  let list = await readDir((await getCurrentDir()) + "\\firmware");
+  list = list.map((item) => {
+    return item.name;
+  });
+  return list;
+}
+
+//const entries = await readDir('users', { dir: BaseDirectory.AppData, recursive: true });
