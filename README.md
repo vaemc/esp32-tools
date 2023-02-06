@@ -5,7 +5,7 @@
 * 所有功能 支持[JSON](/src-tauri/tools.config.json)进行动态配置✅
 
 自带工具如下，可以参考如下配置进行扩展
-```
+``` json
 {
 	"toolListConfig": [
 		{
