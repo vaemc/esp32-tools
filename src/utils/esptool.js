@@ -1,12 +1,20 @@
 import { Command } from "@tauri-apps/api/shell";
 import isHexPrefixed from "is-hex-prefixed";
 import { exists, readTextFile } from "@tauri-apps/api/fs";
-import { terminalWrite } from "./bus";
+import { terminalWrite, refreshFirmwareList } from "./bus";
 import { message } from "ant-design-vue";
 import { portStore } from "../utils/store";
-import { getCurrentDir } from "../utils/hal";
+import {
+  getCurrentDir,
+  isEspToolExists,
+  openDirInExplorer,
+} from "../utils/hal";
+import { notification, Button } from "ant-design-vue";
+import { h } from "vue";
+
 import kleur from "kleur";
 
+const currentDir = await getCurrentDir();
 export const buildDirectory = {
   flash_args: "\\flash_args",
   flash_app_args: "\\flash_app_args",
@@ -15,7 +23,7 @@ export const buildDirectory = {
 
 export async function generateCmd(data, path = "") {
   const port = portStore().port;
-  const currentDir = await getCurrentDir();
+
   let cmd = data;
   if (cmd.find((x) => x === "${port}") != null) {
     if (port === "") {
@@ -37,7 +45,7 @@ export async function generateCmd(data, path = "") {
       case "${chip}":
         return appInfo.chip;
       case "${appName}":
-        return currentDir +"\\firmware\\" +appInfo.appName;
+        return currentDir + "\\firmware\\" + appInfo.appName;
       case "${port}":
         return port;
       case "${path}":
@@ -96,6 +104,34 @@ export async function getFlashArgs(path) {
 }
 
 export async function runCmd(cmd) {
+  let result = await isEspToolExists();
+  if (!result) {
+    notification.open({
+      message: "未检测到esptool工具",
+      description: "请将esptool工具放在软件根目录esptool文件夹！",
+      btn: () =>
+        h(
+          Button,
+          {
+            type: "primary",
+            size: "small",
+            onClick: () => {
+              openDirInExplorer(currentDir + "\\esptool");
+            },
+          },
+          {
+            default: () => "打开文件夹",
+          }
+        ),
+    });
+
+    return;
+  }
+
+  if (cmd.find((x) => x === "merge_bin") != null) {
+    openDirInExplorer(currentDir + "\\firmware");
+  }
+
   cmd = cmd.filter((x) => x != "");
   const command = new Command("esptool", cmd);
   command.on("close", (data) => {});
@@ -103,5 +139,7 @@ export async function runCmd(cmd) {
   command.stdout.on("data", (line) => terminalWrite(line));
   command.stderr.on("data", (line) => terminalWrite(line));
   const child = await command.spawn();
+
+  await refreshFirmwareList();
   //console.log("pid:", child.pid);
 }

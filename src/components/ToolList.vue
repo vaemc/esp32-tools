@@ -74,14 +74,10 @@ export default defineComponent({
       toolsRadioSelect.value = toolListConfig.find(x => x.name === data.target.value)
     }
     onMounted(async () => {
-
-
       if (toolListConfig.length > 0) {
         toolsRadio.value = toolListConfig[0].name;
         toolsRadioSelect.value = toolListConfig[0];
       }
-
-
     })
     return {
       dropBoxClass,

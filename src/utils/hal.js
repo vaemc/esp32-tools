@@ -13,14 +13,14 @@ export async function getCurrentDir() {
 
 export async function getToolListConfig() {
   let jsonData = JSON.parse(
-    await readTextFile((await getCurrentDir()) + "\\config.json")
+    await readTextFile((await getCurrentDir()) + "\\tools.config.json")
   );
   return jsonData.toolListConfig;
 }
 
 export async function getCustomToolList() {
   let jsonData = JSON.parse(
-    await readTextFile((await getCurrentDir()) + "\\config.json")
+    await readTextFile((await getCurrentDir()) + "\\tools.config.json")
   );
   return jsonData.customToolList;
 }
@@ -33,4 +33,15 @@ export async function getFirmwareList() {
   return list;
 }
 
-//const entries = await readDir('users', { dir: BaseDirectory.AppData, recursive: true });
+export async function isEspToolExists() {
+  let list = await readDir((await getCurrentDir()) + "\\esptool");
+  let result = list.find((x) => x.name.includes("esptool")) != null;
+  if (result) {
+    return true;
+  }
+  return false;
+}
+
+export async function openDirInExplorer(path) {
+  invoke("open_dir_in_explorer", { path: path });
+}

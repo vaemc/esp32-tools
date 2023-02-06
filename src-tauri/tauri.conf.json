@@ -15,6 +15,9 @@
       "all": false,
       "fs": { "all": true, "scope": ["**"] },
       "path": { "all": true },
+      "os": {
+        "all": true
+      },
       "shell": {
         "all": true,
         "execute": true,
@@ -23,7 +26,7 @@
         "scope": [
           {
             "name": "esptool",
-            "cmd": "./esptool/esptool.exe",
+            "cmd": "./esptool/esptool",
             "args": true
           }
         ]

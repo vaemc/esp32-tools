@@ -16,8 +16,10 @@ tauri-build = { version = "1.2", features = [] }
 [dependencies]
 serde_json = "1.0"
 serde = { version = "1.0", features = ["derive"] }
-tauri = { version = "1.2", features = ["fs-all", "path-all", "shell-all"] }
+tauri = { version = "1.2", features = ["fs-all", "os-all", "path-all", "shell-all"] }
 serialport = "4.2.0"
+bincode = "1.3.3"
+anyhow = "1.0.69"
 
 [features]
 # by default Tauri runs in production mode
