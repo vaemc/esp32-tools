@@ -8,7 +8,7 @@ import {
   getCurrentDir,
   isEspToolExists,
   openFileInExplorer,
-} from "../utils/hal";
+} from "../utils/native";
 import { notification, Button } from "ant-design-vue";
 import { h } from "vue";
 

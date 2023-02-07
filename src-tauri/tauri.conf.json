@@ -18,6 +18,10 @@
       "os": {
         "all": true
       },
+      "dialog": {
+        "all": true,
+        "open": true
+      },
       "shell": {
         "all": true,
         "execute": true,

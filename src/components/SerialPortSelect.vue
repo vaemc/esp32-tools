@@ -6,7 +6,7 @@
 <script>
 import { defineComponent, ref, onMounted } from "vue";
 import { portStore } from '../utils/store';
-import { getSerialPortList } from '../utils/hal';
+import { getSerialPortList } from '../utils/native';
 export default defineComponent({
   setup() {
     const selectSerialPort = ref()

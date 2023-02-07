@@ -6,6 +6,7 @@ export const toolListConfig = [
     dropDesc: "选择或者拖拽build目录到此",
     dropHelp: "请在执行idf.py build后再使用",
     dropRegex: "(build)$",
+    isDirectory: true,
     cmd: ["--chip", "${chip}", "merge_bin", "-o", "${appName}", "${flashArgs}"],
   },
   {
@@ -15,6 +16,7 @@ export const toolListConfig = [
     dropDesc: "选择或者拖拽build目录到此",
     dropHelp: "请在执行idf.py build后再使用",
     dropRegex: "(build)$",
+    isDirectory: true,
     cmd: [
       "--chip",
       "${chip}",
@@ -35,6 +37,7 @@ export const toolListConfig = [
     dropDesc: "选择或者拖拽bin文件到此",
     dropHelp: "只支持下载地址为0x0的固件",
     dropRegex: ".(bin)$",
+    isDirectory: false,
     cmd: ["-p", "${port}", "-b", "1152000", "write_flash", "0x0", "${path}"],
   },
 ];

@@ -7,9 +7,8 @@
           <a-radio-button :value="item.name">{{ item.name }}</a-radio-button>
         </a-tooltip>
       </a-radio-group>
-      <!-- <a-checkbox v-model:checked="checked">加入固件列表</a-checkbox> -->
     </template>
-    <div :class="dropBoxClass">
+    <div :class="dropBoxClass" @click="openFileDialog">
       <InboxOutlined style="color: #2196f3; font-size: 50px" />
       <span style="display: block; font-size: 16px; align-self: center">{{ toolsRadioSelect.dropDesc }}</span>
       <span style="
@@ -24,12 +23,14 @@
 
 <script>
 import { defineComponent, ref, onMounted } from "vue";
-
 import { message } from 'ant-design-vue';
 import { runCmd, generateCmd } from "../utils/esptool"
 import { InboxOutlined } from "@ant-design/icons-vue";
 import { listen } from "@tauri-apps/api/event";
-import { getToolListConfig } from "../utils/hal"
+import { getToolListConfig } from "../utils/native"
+import { open } from '@tauri-apps/api/dialog';
+
+
 const toolListConfig = await getToolListConfig()
 export default defineComponent({
   components: {
@@ -73,6 +74,17 @@ export default defineComponent({
     const toolsRadioChange = (data) => {
       toolsRadioSelect.value = toolListConfig.find(x => x.name === data.target.value)
     }
+    const openFileDialog = async () => {
+      const selected = await open({
+        directory: toolsRadioSelect.value.isDirectory,
+        multiple: false,
+      });
+      if (!Array.isArray(selected) && selected !== null) {
+        let cmd = toolsRadioSelect.value.cmd;
+        cmd = await generateCmd(cmd, selected);
+        runCmd(cmd);
+      }
+    };
     onMounted(async () => {
       if (toolListConfig.length > 0) {
         toolsRadio.value = toolListConfig[0].name;
@@ -85,7 +97,8 @@ export default defineComponent({
       toolsRadio,
       toolListConfig,
       toolsRadioChange,
-      toolsRadioSelect
+      toolsRadioSelect,
+      openFileDialog
     };
   }
 });
