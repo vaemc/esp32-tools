@@ -33,7 +33,7 @@ fn get_current_dir() -> String {
 }
 
 #[tauri::command]
-fn open_dir_in_explorer(path: &str) {
+fn open_file_in_explorer(path: &str) {
     let platform = env::consts::OS.to_string();
     let mut program = "explorer";
     if platform == "windows".to_string() {
@@ -67,7 +67,7 @@ fn main() {
             greet,
             get_serial_port_list,
             get_current_dir,
-            open_dir_in_explorer
+            open_file_in_explorer
         ])
         .run(tauri::generate_context!())
         .expect("error while running tauri application");

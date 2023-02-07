@@ -35,7 +35,7 @@ export const toolListConfig = [
     dropDesc: "选择或者拖拽bin文件到此",
     dropHelp: "只支持下载地址为0x0的固件",
     dropRegex: ".(bin)$",
-    cmd: ["-p", "${port}", "write_flash", "0x0", "${path}"],
+    cmd: ["-p", "${port}", "-b", "1152000", "write_flash", "0x0", "${path}"],
   },
 ];
 

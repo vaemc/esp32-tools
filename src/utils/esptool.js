@@ -7,7 +7,7 @@ import { portStore } from "../utils/store";
 import {
   getCurrentDir,
   isEspToolExists,
-  openDirInExplorer,
+  openFileInExplorer,
 } from "../utils/hal";
 import { notification, Button } from "ant-design-vue";
 import { h } from "vue";
@@ -116,7 +116,7 @@ export async function runCmd(cmd) {
             type: "primary",
             size: "small",
             onClick: () => {
-              openDirInExplorer(currentDir + "\\esptool");
+              openFileInExplorer(currentDir + "\\esptool");
             },
           },
           {
@@ -129,7 +129,7 @@ export async function runCmd(cmd) {
   }
 
   if (cmd.find((x) => x === "merge_bin") != null) {
-    openDirInExplorer(currentDir + "\\firmware");
+    openFileInExplorer(currentDir + "\\firmware");
   }
 
   cmd = cmd.filter((x) => x != "");

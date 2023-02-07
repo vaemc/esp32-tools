@@ -1,37 +1,62 @@
 <template>
   <a-card title="固件列表" style="height: 100%">
     <div style="height: 300px; overflow: auto" class="scroll">
-      <a-popover v-for="item in firmwareList" :title="item">
+      <a-popover v-for="item in firmwareList" :title="item" trigger="click">
         <template #content>
-          <a-button style="margin: 3px">烧录</a-button>
-
-          <a-button style="margin: 3px" primary>打开</a-button>
-          <a-button style="margin: 3px" danger>删除</a-button>
+          <a-button style="margin: 3px" @click="btn(item, 'flash')"
+            >烧录</a-button
+          >
+          <a-button style="margin: 3px" @click="btn(item, 'open')" primary
+            >打开</a-button
+          >
+          <a-button style="margin: 3px" @click="btn(item, 'remove')" danger
+            >删除</a-button
+          >
         </template>
-        <a-button type="dashed" size="small" style="margin: 3px">{{ item }}</a-button>
+        <a-button type="dashed" size="small" style="margin: 3px">{{
+          item
+        }}</a-button>
       </a-popover>
-
-
     </div>
   </a-card>
 </template>
 <script>
 import { defineComponent, ref, onMounted } from "vue";
-import { getFirmwareList } from "../utils/hal";
-import emitter from "../utils/bus"
-
+import { runCmd, generateCmd } from "../utils/esptool";
+import { toolListConfig } from "../utils/tools-config";
+import {
+  getFirmwareList,
+  openFileInExplorer,
+  getCurrentDir,
+} from "../utils/hal";
+import emitter from "../utils/bus";
+// openFileInExplorer(currentDir + "\\firmware");
 const firmwareList = await getFirmwareList();
+const currentDir = await getCurrentDir();
 export default defineComponent({
   setup() {
-
-    emitter.on('refreshFirmwareList', async data => {
+    emitter.on("refreshFirmwareList", async (data) => {
       let list = await getFirmwareList();
       firmwareList.value = await getFirmwareList();
-    })
-
-
+    });
+    const btn = async (item, type) => {
+      let path = currentDir + "\\firmware\\" + item;
+      switch (type) {
+        case "flash":
+          let cmd = await generateCmd(toolListConfig[2].cmd, path);
+          runCmd(cmd);
+          break;
+        case "open":
+          openFileInExplorer(currentDir + "\\firmware");
+          break;
+        case "remove":
+          //removeFile(currentDir + "\\firmware\\" + item);
+          break;
+      }
+    };
     return {
       firmwareList,
+      btn,
     };
   },
 });
