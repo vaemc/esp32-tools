@@ -1,6 +1,6 @@
 <template>
     <div style="width: 100%;">
-        <div id="terminal" style="height:160px;margin-top:16px" class="xterm"></div>
+        <div id="terminal" style="height:160px;" class="xterm"></div>
     </div>
 </template>
 <script setup>

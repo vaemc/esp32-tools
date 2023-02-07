@@ -1,6 +1,6 @@
 <template>
   <a-select v-model:value="selectSerialPort" @dropdownVisibleChange="serialPortListSelectFocus"
-    @focus="serialPortListSelectFocus" @change="serialPortListSelectChange" style="width: 100%; margin-bottom: 16px"
+    @focus="serialPortListSelectFocus" @change="serialPortListSelectChange" style="width: 100%; "
     :options="serialPortList"></a-select>
 </template>
 <script>
