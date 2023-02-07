@@ -31,8 +31,7 @@ export async function generateCmd(data, path = "") {
       return;
     }
   }
-  let isIncludeFlashArgs =
-    cmd.find((x) => x === "${flashArgs}") == null ? false : true;
+  let isIncludeFlashArgs = cmd.find((x) => x === "${flashArgs}") != null;
   let appInfo;
   if (isIncludeFlashArgs) {
     appInfo = await getFlashArgs(path);

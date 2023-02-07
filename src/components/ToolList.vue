@@ -94,7 +94,7 @@ export default defineComponent({
 <style>
 .dropBox {
   width: 100%;
-  height: 150px;
+  height: 120px;
   border: 1px dashed #434343;
   display: flex;
   flex-direction: column;
@@ -105,7 +105,7 @@ export default defineComponent({
 
 .dropBox:hover {
   width: 100%;
-  height: 150px;
+  height: 120px;
   border: 1px dashed #177ddc;
   cursor: pointer;
   transition: all ease 1s;
@@ -113,7 +113,7 @@ export default defineComponent({
 
 .dropBoxHover {
   width: 100%;
-  height: 150px;
+  height: 120px;
   border: 1px dashed #177ddc;
   display: flex;
   flex-direction: column;

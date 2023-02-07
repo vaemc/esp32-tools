@@ -1,22 +1,21 @@
 <template>
   <a-card title="所有功能">
-    <div style="display:flex; flex-wrap: wrap; justify-content:center">
-      <a-tooltip v-for="item in customToolList" :key="item.name">
-        <template #title v-if="item.toast != null">{{ item.toast }}</template>
-        <a-button @click="run(item.cmd)" style="margin: 5px" type="primary">{{
-          item.name
-        }}</a-button>
-      </a-tooltip>
-
-
-
+    <div class="scroll" style="height:344px;overflow: auto">
+      <div style="display: flex; flex-wrap: wrap; justify-content: center">
+        <a-tooltip v-for="item in customToolList" :key="item.name">
+          <template #title v-if="item.toast != null">{{ item.toast }}</template>
+          <a-button size="small" @click="run(item.cmd)" style="margin: 5px" >{{
+            item.name
+          }}</a-button>
+        </a-tooltip>
+      </div>
     </div>
   </a-card>
 </template>
 <script>
 import { defineComponent, ref } from "vue";
-import { runCmd, generateCmd } from "../utils/esptool"
-import { getCustomToolList } from "../utils/hal"
+import { runCmd, generateCmd } from "../utils/esptool";
+import { getCustomToolList } from "../utils/hal";
 const customToolList = await getCustomToolList();
 export default defineComponent({
   setup() {
@@ -31,3 +30,19 @@ export default defineComponent({
   },
 });
 </script>
+<style>
+.scroll::-webkit-scrollbar-track {
+  -webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
+  background-color: #141414;
+}
+
+.scroll::-webkit-scrollbar {
+  width: 10px;
+  background-color: #141414;
+}
+
+.scroll::-webkit-scrollbar-thumb {
+  background-color: #000000;
+  border: 2px solid #555555;
+}
+</style>

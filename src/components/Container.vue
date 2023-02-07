@@ -1,13 +1,13 @@
 <template>
   <div>
     <SerialPortSelect />
-    <a-row :gutter="16">
-      <a-col :span="15">
+    <a-row :gutter="10">
+      <a-col :span="15" >
         <ToolList />
-        <CustomToolList style="margin-top:16px;" />
+        <FirmwareList  style="margin-top: 10px;"  />
       </a-col>
       <a-col :span="9">
-        <FirmwareList />
+        <CustomToolList/>
       </a-col>
     </a-row>
     <Terminal />
@@ -19,7 +19,4 @@ import ToolList from "./ToolList.vue";
 import CustomToolList from "./CustomToolList.vue";
 import Terminal from "./Terminal.vue";
 import FirmwareList from "./FirmwareList.vue";
-
-
-
 </script>
