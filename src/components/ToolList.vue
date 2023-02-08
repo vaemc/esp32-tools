@@ -38,16 +38,21 @@ import { historyPathStore } from "../utils/store";
 
 const toolListConfig = await getToolListConfig();
 
-function historyPathGenerate(data) {
+function historyPathSave(data) {
   let path = data.split("\\");
+  let result;
   if (path.length >= 5) {
     let temp = `${path[0]}\\${path[1]}\\${path[2]}\\...\\${
       path[path.length - 2]
     }\\${path[path.length - 1]}`;
-    return { full: data, ellipsis: temp, name: path[path.length - 1] };
+    result = { full: data, ellipsis: temp, name: path[path.length - 1] };
+  } else {
+    result = { full: data, ellipsis: data, name: path[path.length - 1] };
   }
-
-  return { full: data, ellipsis: data, name: path[path.length - 1] };
+  let historyPathList = historyPathStore().pathList;
+  if (historyPathList.filter((x) => x.full === result.full).length == 0) {
+    historyPathStore().pathList.push(result);
+  }
 }
 export default defineComponent({
   components: {
@@ -70,7 +75,8 @@ export default defineComponent({
         message.warning("请按要求选择文件！");
         return;
       }
-      historyPathStore().pathList.push(historyPathGenerate(path));
+      historyPathSave(path);
+      // historyPathStore().pathList.push(historyPathGenerate(path));
       let cmd = toolsRadioSelect.value.cmd;
       cmd = await generateCmd(cmd, path);
       runCmd(cmd);
@@ -107,7 +113,8 @@ export default defineComponent({
           message.warning("请按要求选择文件夹！");
           return;
         }
-        historyPathStore().pathList.push(historyPathGenerate(selected));
+        historyPathSave(selected);
+        //  historyPathStore().pathList.push(historyPathGenerate(selected));
         let cmd = toolsRadioSelect.value.cmd;
         cmd = await generateCmd(cmd, selected);
         runCmd(cmd);

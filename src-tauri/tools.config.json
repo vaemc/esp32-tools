@@ -51,7 +51,7 @@
       {
         "name": "factory_nvs",
         "value": "factory_nvs",
-        "toast": "烧录HomeKit 烧录factory_nvs",
+        "toast": "烧录HomeKit factory_nvs",
         "dropDesc": "选择或者拖拽bin文件到此",
         "dropHelp": "只支持下载地址为0x1E0000的固件",
         "dropRegex": ".(bin)$",
