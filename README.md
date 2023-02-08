@@ -4,6 +4,9 @@
 
 * 所有功能 支持[JSON](/src-tauri/tools.config.json)进行动态配置✅
 
+# Some Screenshots
+![](images/1.png)
+
 自带工具如下，可以参考如下配置进行扩展
 ``` json
 {
@@ -88,5 +91,4 @@
 }
 ```
 
-# Some Screenshots
-![](images/1.png)
+
