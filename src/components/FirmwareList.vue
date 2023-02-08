@@ -28,7 +28,7 @@ import {
   getFirmwareList,
   openFileInExplorer,
   getCurrentDir,
-} from "../utils/hal";
+} from "../utils/native";
 import emitter from "../utils/bus";
 // openFileInExplorer(currentDir + "\\firmware");
 const firmwareList = await getFirmwareList();
