@@ -1,7 +1,11 @@
 <template>
-  <a-card title="固件列表">
+  <a-card title="历史路径">
     <div style="height: 125px; overflow: auto" class="scroll">
-      <a-popover v-for="item in firmwareList" :title="item" trigger="click">
+      <a-popover
+        v-for="item in historyPathList"
+        :title="item.full"
+        trigger="click"
+      >
         <template #content>
           <a-button style="margin: 3px" @click="btn(item, 'flash')"
             >烧录</a-button
@@ -14,7 +18,7 @@
           >
         </template>
         <a-button type="dashed" size="small" style="margin: 3px">{{
-          item
+          item.ellipsis
         }}</a-button>
       </a-popover>
     </div>
@@ -24,39 +28,42 @@
 import { defineComponent, ref, onMounted } from "vue";
 import { runCmd, generateCmd } from "../utils/esptool";
 import { toolListConfig } from "../utils/tools-config";
-import {
-  getFirmwareList,
-  openFileInExplorer,
-  getCurrentDir,
-  removeFile,
-} from "../utils/native";
-import emitter from "../utils/bus";
-// openFileInExplorer(currentDir + "\\firmware");
-const firmwareList = ref(await getFirmwareList());
-const currentDir = await getCurrentDir();
+import { historyPathStore } from "../utils/store";
+import { openFileInExplorer } from "../utils/native";
 export default defineComponent({
   setup() {
-    emitter.on("refreshFirmwareList", async (data) => {
-      firmwareList.value = await getFirmwareList();
-    });
+    const historyPathList = ref(historyPathStore().pathList);
     const btn = async (item, type) => {
-      let path = currentDir + "\\firmware\\" + item;
       switch (type) {
         case "flash":
-          let cmd = await generateCmd(toolListConfig[2].cmd, path);
+          let cmd;
+          if (item.name === "build") {
+            cmd = await generateCmd(toolListConfig[1].cmd, item.full);
+            runCmd(cmd);
+            return;
+          }
+          cmd = await generateCmd(toolListConfig[2].cmd, item.full);
           runCmd(cmd);
           break;
         case "open":
-          openFileInExplorer(currentDir + "\\firmware");
+          if (item.name === "build") {
+            openFileInExplorer(item.full);
+            return;
+          }
+          openFileInExplorer(
+            item.full.slice(0, item.full.length - item.name.length)
+          );
           break;
         case "remove":
-          removeFile(currentDir + "\\firmware\\" + item);
-          firmwareList.value = await getFirmwareList();
+          historyPathStore().pathList = historyPathList.value.filter(
+            (x) => x.full !== item.full
+          );
+          historyPathList.value = historyPathStore().pathList;
           break;
       }
     };
     return {
-      firmwareList,
+      historyPathList,
       btn,
     };
   },

@@ -1,5 +1,5 @@
 import { invoke } from "@tauri-apps/api/tauri";
-import { readTextFile, readDir, removeFile } from "@tauri-apps/api/fs";
+import { readTextFile, readDir, removeFile as rf } from "@tauri-apps/api/fs";
 
 export async function getSerialPortList() {
   let data = await invoke("get_serial_port_list");
@@ -46,3 +46,6 @@ export async function openFileInExplorer(path) {
   invoke("open_file_in_explorer", { path: path });
 }
 
+export async function removeFile(path) {
+  await rf(path);
+}

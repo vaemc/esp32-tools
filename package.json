@@ -16,6 +16,7 @@
     "kleur": "^4.1.5",
     "mitt": "^3.0.0",
     "pinia": "^2.0.30",
+    "pinia-plugin-persistedstate": "^3.0.2",
     "vue": "^3.2.45",
     "xterm": "^5.1.0",
     "xterm-addon-fit": "^0.7.0"

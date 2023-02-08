@@ -4,7 +4,9 @@ import { createPinia } from "pinia";
 import App from "./App.vue";
 import Antd from "ant-design-vue";
 import "ant-design-vue/dist/antd.dark.css";
+import piniaPluginPersistedstate from "pinia-plugin-persistedstate";
 
-createApp(App).use(createPinia()).use(Antd).mount("#app");
+const pinia = createPinia();
+pinia.use(piniaPluginPersistedstate);
 
-
+createApp(App).use(pinia).use(Antd).mount("#app");
