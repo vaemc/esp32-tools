@@ -40,6 +40,32 @@ export const toolListConfig = [
     isDirectory: false,
     cmd: ["-p", "${port}", "-b", "1152000", "write_flash", "0x0", "${path}"],
   },
+  {
+    name: "factory_nvs",
+    value: "factory_nvs",
+    toast: "烧录HomeKit 烧录factory_nvs",
+    dropDesc: "选择或者拖拽bin文件到此",
+    dropHelp: "只支持下载地址为0x1E0000的固件",
+    dropRegex: ".(bin)$",
+    isDirectory: false,
+    cmd: [
+      "-p",
+      "${port}",
+      "-b",
+      "921600",
+      "--after",
+      "hard_reset",
+      "write_flash",
+      "--flash_mode",
+      "dio",
+      "--flash_size",
+      "detect",
+      "--flash_freq",
+      "40m",
+      "0x1E0000",
+      "${path}",
+    ],
+  },
 ];
 
 export const customToolList = [

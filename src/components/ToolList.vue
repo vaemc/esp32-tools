@@ -5,6 +5,7 @@
         v-model:value="toolsRadio"
         @change="toolsRadioChange"
         button-style="solid"
+        size="small"
       >
         <a-tooltip v-for="item in toolListConfig" :key="item.name">
           <template #title v-if="item.toast != null">{{ item.toast }}</template>
