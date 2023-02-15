@@ -139,6 +139,7 @@ export async function runCmd(cmd) {
   command.stderr.on("data", (line) => terminalWrite(line));
   const child = await command.spawn();
 
+  await new Promise((r) => setTimeout(r, 2500));
   await refreshFirmwareList();
   //console.log("pid:", child.pid);
 }
