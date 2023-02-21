@@ -5,7 +5,7 @@ export const portStore = defineStore("portStore", {
   }),
 });
 
-export const historyPathStore = defineStore("HistoryPath", {
+export const historyPathStore = defineStore("historyPath", {
   state: () => ({
     pathList: [],
   }),

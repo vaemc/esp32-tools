@@ -37,9 +37,6 @@ export async function generateCmd(data, path = "") {
     appInfo = await getFlashArgs(path);
   }
   cmd = cmd.map((item) => {
-    if (item === "${chip}") {
-      return appInfo.chip;
-    }
     switch (item) {
       case "${chip}":
         return appInfo.chip;
