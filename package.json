@@ -12,6 +12,7 @@
   "dependencies": {
     "@tauri-apps/api": "^1.2.0",
     "ant-design-vue": "^3.2.15",
+    "balanced-match": "^2.0.0",
     "is-hex-prefixed": "^1.0.0",
     "kleur": "^4.1.5",
     "mitt": "^3.0.0",

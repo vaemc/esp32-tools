@@ -4,6 +4,7 @@ import { exists, readTextFile } from "@tauri-apps/api/fs";
 import { terminalWrite, refreshFirmwareList } from "./bus";
 import { message } from "ant-design-vue";
 import { portStore } from "../utils/store";
+import balanced from 'balanced-match';
 import {
   getCurrentDir,
   isEspToolExists,
@@ -128,6 +129,8 @@ export async function runCmd(cmd) {
     openFileInExplorer(currentDir + "\\firmware");
   }
 
+  console.log(balanced('Detected flash size: ', 'MB', 'Detected flash size: 8MB').body);
+  
   cmd = cmd.filter((x) => x != "");
   const command = new Command("esptool", cmd);
   command.on("close", (data) => {});
