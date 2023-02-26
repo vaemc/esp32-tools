@@ -32,7 +32,7 @@ import { message } from "ant-design-vue";
 import { runCmd, generateCmd } from "../utils/esptool";
 import { InboxOutlined } from "@ant-design/icons-vue";
 import { listen } from "@tauri-apps/api/event";
-import { getToolListConfig } from "../utils/native";
+import { getToolListConfig } from "../utils/common";
 import { open } from "@tauri-apps/api/dialog";
 import { historyPathStore } from "../utils/store";
 

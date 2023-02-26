@@ -29,7 +29,7 @@ import {
   openFileInExplorer,
   getCurrentDir,
   removeFile,
-} from "../utils/native";
+} from "../utils/common";
 import emitter from "../utils/bus";
 // openFileInExplorer(currentDir + "\\firmware");
 const firmwareList = ref(await getFirmwareList());

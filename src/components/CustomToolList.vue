@@ -10,9 +10,7 @@
         </a-tooltip>
         <a-tooltip>
           <template #title>读取固件</template>
-          <a-button size="small" @click="readFirmware()" style="margin: 5px"
-            >读取固件</a-button
-          >
+          <a-button size="small" @click="readFirmware()" style="margin: 5px">读取固件</a-button>
         </a-tooltip>
       </div>
     </div>
@@ -20,8 +18,8 @@
 </template>
 <script>
 import { defineComponent, ref } from "vue";
-import { runCmd, generateCmd } from "../utils/esptool";
-import { getCustomToolList } from "../utils/native";
+import { runCmd, generateCmd,saveFirmware } from "../utils/esptool";
+import { getCustomToolList, saveFileDialog } from "../utils/common";
 const customToolList = await getCustomToolList();
 export default defineComponent({
   setup() {
@@ -32,9 +30,15 @@ export default defineComponent({
         cmd = await generateCmd(cmd);
         runCmd(cmd);
       },
-      readFirmware:()=>{
-        console.log('读取');
-        
+      readFirmware: async () => {
+
+        let savePath = await saveFileDialog();
+        console.log(savePath);
+
+        let cmd = ["-p", "${port}", "flash_id"];
+        cmd = await generateCmd(cmd);
+        console.log(cmd);
+        saveFirmware(cmd,savePath);
       }
     };
   },

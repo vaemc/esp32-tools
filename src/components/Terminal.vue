@@ -1,7 +1,7 @@
 <template>
-    <div style="width: 100%;">
-        <div id="terminal" style="height:160px;" class="xterm"></div>
-    </div>
+  <div style="width: 100%;">
+    <div id="terminal" style="height:160px;" class="xterm"></div>
+  </div>
 </template>
 <script setup>
 import emitter from "../utils/bus"
@@ -10,26 +10,25 @@ import "xterm/lib/xterm.js";
 import { Terminal } from "xterm";
 import { FitAddon } from "xterm-addon-fit";
 import { onMounted } from "vue";
-
 const terminal = new Terminal({
-    fontSize: 14,
-    allowProposedApi: true,
-    cursorStyle: "bar",
-    theme: {
-        background: "#202020",
-        magenta: "#e39ef7",
-    },
+  fontSize: 14,
+  allowProposedApi: true,
+  cursorStyle: "bar",
+  theme: {
+    background: "#202020",
+    magenta: "#e39ef7",
+  },
 });
 
 emitter.on('terminal', data => {
-    terminal.writeln(data);
+  terminal.writeln(data);
 })
 
 onMounted(() => {
-    const fitAddon = new FitAddon();
-    terminal.loadAddon(fitAddon);
-    terminal.open(document.getElementById("terminal"));
-    fitAddon.fit();
+  const fitAddon = new FitAddon();
+  terminal.loadAddon(fitAddon);
+  terminal.open(document.getElementById("terminal"));
+  fitAddon.fit();
 })
 </script>
 <style>

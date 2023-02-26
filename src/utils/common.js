@@ -1,6 +1,19 @@
 import { invoke } from "@tauri-apps/api/tauri";
 import { readTextFile, readDir, removeFile as rf } from "@tauri-apps/api/fs";
+import { save } from "@tauri-apps/api/dialog";
 
+export async function saveFileDialog() {
+  const filePath = await save({
+    filters: [
+      {
+        name: "Bin",
+        extensions: ["bin"],
+      },
+    ],
+  });
+
+  return filePath;
+}
 export async function getSerialPortList() {
   let data = await invoke("get_serial_port_list");
   return JSON.parse(data);

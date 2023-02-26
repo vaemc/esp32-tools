@@ -29,7 +29,7 @@ import { defineComponent, ref, onMounted } from "vue";
 import { runCmd, generateCmd } from "../utils/esptool";
 import { toolListConfig } from "../utils/tools-config";
 import { historyPathStore } from "../utils/store";
-import { openFileInExplorer } from "../utils/native";
+import { openFileInExplorer } from "../utils/common";
 export default defineComponent({
   setup() {
     const historyPathList = ref(historyPathStore().pathList);
