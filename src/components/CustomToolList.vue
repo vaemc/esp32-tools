@@ -8,10 +8,10 @@
             item.name
           }}</a-button>
         </a-tooltip>
-        <a-tooltip>
+        <!-- <a-tooltip>
           <template #title>读取固件</template>
           <a-button size="small" @click="readFirmware()" style="margin: 5px">读取固件</a-button>
-        </a-tooltip>
+        </a-tooltip> -->
       </div>
     </div>
   </a-card>
