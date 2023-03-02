@@ -1,6 +1,6 @@
 <template>
-  <a-card title="固件列表">
-    <div style="height: 125px; overflow: auto" class="scroll">
+  <a-card size="small" title="固件列表">
+    <div style="height: 80px; overflow: auto" class="scroll">
       <a-popover v-for="item in firmwareList" :title="item" trigger="click">
         <template #content>
           <a-button style="margin: 3px" @click="btn(item, 'flash')"

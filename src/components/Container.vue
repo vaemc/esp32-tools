@@ -8,10 +8,8 @@
         <ToolList style="flex: 1; margin-right: 5px" />
         <CustomToolList style="flex: 1; margin-left: 5px" />
       </div>
-      <div style="display: flex; flex-direction: row; margin-top: 10px">
-        <HistoryPath style="flex: 1; margin-right: 5px" />
-        <FirmwareList style="flex: 1; margin-left: 5px" />
-      </div>
+      <HistoryPath style="margin: 5px 0" />
+      <FirmwareList style="margin: 5px 0" />
     </div>
     <div class="row footer">
       <Terminal />

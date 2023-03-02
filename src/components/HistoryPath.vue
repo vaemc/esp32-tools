@@ -1,6 +1,6 @@
 <template>
-  <a-card title="历史路径">
-    <div style="height: 125px; overflow: auto" class="scroll">
+  <a-card size="small" title="历史路径">
+    <div style="height: 80px; overflow: auto" class="scroll">
       <a-popover
         v-for="item in historyPathList"
         :title="item.full"

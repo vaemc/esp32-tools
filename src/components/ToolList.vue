@@ -13,8 +13,8 @@
         </a-tooltip>
       </a-radio-group>
     </template>
-    <div :class="dropBoxClass" @click="openFileDialog">
-      <InboxOutlined style="color: #2196f3; font-size: 50px" />
+    <div style="height: 75px;" :class="dropBoxClass" @click="openFileDialog">
+      <!-- <InboxOutlined style="color: #2196f3; font-size: 40px" /> -->
       <span style="display: block; font-size: 16px; align-self: center">{{
         toolsRadioSelect.dropDesc
       }}</span>
